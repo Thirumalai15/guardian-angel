@@ -1,12 +1,13 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace Icrewsystems\GuardianAngel;
 
+use Icrewsystems\GuardianAngel\Services\GuardianAngelService;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use VendorName\Skeleton\Commands\SkeletonCommand;
+use Icrewsystems\GuardianAngel\Commands\GuardianAngelCommand;
 
-class SkeletonServiceProvider extends PackageServiceProvider
+class GuardianAngelServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
@@ -16,10 +17,13 @@ class SkeletonServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('skeleton')
+            ->name('guardian-angel')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_skeleton_table')
-            ->hasCommand(SkeletonCommand::class);
+            ->hasMigration('create_guardian-angel_table')
+            ->hasCommand(GuardianAngelCommand::class);
     }
+
+
+
 }
