@@ -45,15 +45,15 @@ class GuardianAngelService
                 'fullUrl' => Request::fullUrl(),
 
                 'additional' => [
-//                    'SERVER' => $_SERVER,
+                    //                    'SERVER' => $_SERVER,
                     'USER' => $this->getUser() ?? 'null',
                     'HTTP_USER_AGENT' => $_SERVER['HTTP_USER_AGENT'] ?? null,
                     'SERVER_PROTOCOL' => $_SERVER['SERVER_PROTOCOL'] ?? null,
                     'SERVER_SOFTWARE' => $_SERVER['SERVER_SOFTWARE'] ?? null,
                     'PHP_VERSION' => phpversion(),
                     'OLD' => Request::hasSession() ? Request::old() : [],
-//                    'COOKIE' => $_COOKIE,
-//                    'SESSION' => session(),
+                    //                    'COOKIE' => $_COOKIE,
+                    //                    'SESSION' => session(),
                 ],
                 'PARAMETERS' => Request::all(),
                 'chat_gpt_question' => $this->generate_gpt_question($message ?? $exception->getMessage()),
