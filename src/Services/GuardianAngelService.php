@@ -32,7 +32,7 @@ class GuardianAngelService
                     'line' => $exception->getLine(),
                     'file' => $exception->getFile(),
                     'class' => get_class($exception),
-                    'stack_trace' => $exception->getTrace(),
+                    'stack_trace' => $exception->getTraceAsString(),
                 ],
 
                 'project' => [
@@ -47,16 +47,15 @@ class GuardianAngelService
                 'fullUrl' => Request::fullUrl(),
 
                 'additional' => [
-                    'SERVER' => $_SERVER,
-                    'HEADERS' => Request::header(),
-                    'USER' => Request::server('USER'),
+//                    'SERVER' => $_SERVER,
+                    'USER' => $this->getUser() ?? 'null',
                     'HTTP_USER_AGENT' => $_SERVER['HTTP_USER_AGENT'] ?? null,
                     'SERVER_PROTOCOL' => $_SERVER['SERVER_PROTOCOL'] ?? null,
                     'SERVER_SOFTWARE' => $_SERVER['SERVER_SOFTWARE'] ?? null,
                     'PHP_VERSION' => phpversion(),
                     'OLD' => Request::hasSession() ? Request::old() : [],
-                    'COOKIE' => $_COOKIE,
-                    'SESSION' => session(),
+//                    'COOKIE' => $_COOKIE,
+//                    'SESSION' => session(),
                 ],
                 'PARAMETERS' => Request::all(),
                 'chat_gpt_question' => $this->generate_gpt_question($message ?? $exception->getMessage()),
@@ -69,7 +68,7 @@ class GuardianAngelService
                 $e->getMessage(),
             ]);
         }
-
+        
         SendExceptionJob::dispatch(json_encode($data));
 
         return true;
@@ -98,6 +97,20 @@ class GuardianAngelService
     private function generate_key_for_exception(array $data)
     {
         return 'exception.' . Str::slug($data['host'] . '_' . $data['method'] . '_' . $data['exception']['exception'] . '_' . $data['exception']['line'] . '_' . $data['exception']['file'] . '_' . $data['exception']['class']);
+    }
+
+    public function getUser()
+    {
+        if (function_exists('auth') && (app() instanceof \Illuminate\Foundation\Application && auth()->check())) {
+            /** @var \Illuminate\Contracts\Auth\Authenticatable $user */
+            $user = auth()->user();
+
+            if ($user instanceof \Illuminate\Database\Eloquent\Model) {
+                return $user->toArray();
+            }
+        }
+
+        return null;
     }
 }
 

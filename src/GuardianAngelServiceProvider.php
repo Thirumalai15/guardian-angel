@@ -19,8 +19,6 @@ class GuardianAngelServiceProvider extends PackageServiceProvider
         $package
             ->name('guardian-angel')
             ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_guardian-angel_table')
             ->hasCommand(GuardianAngelCommand::class);
     }
 
