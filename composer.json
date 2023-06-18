@@ -6,7 +6,7 @@
         "laravel",
         "guardian-angel"
     ],
-    "homepage": "https://github.com/icrewsystems/guardian-angel",
+    "homepage": "https://github.com/thirumalai15/guardian-angel",
     "license": "MIT",
     "authors": [
         {
@@ -68,5 +68,6 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "version": "1.0.0"
 }

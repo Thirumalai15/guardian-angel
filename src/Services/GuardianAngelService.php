@@ -68,7 +68,7 @@ class GuardianAngelService
                 $e->getMessage(),
             ]);
         }
-        
+
         SendExceptionJob::dispatch(json_encode($data));
 
         return true;
