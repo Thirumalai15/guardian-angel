@@ -2,9 +2,9 @@
 
 namespace Icrewsystems\GuardianAngel\Tests;
 
+use Icrewsystems\GuardianAngel\GuardianAngelServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Icrewsystems\GuardianAngel\GuardianAngelServiceProvider;
 
 class TestCase extends Orchestra
 {

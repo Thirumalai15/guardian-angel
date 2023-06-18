@@ -2,10 +2,9 @@
 
 namespace Icrewsystems\GuardianAngel;
 
-use Icrewsystems\GuardianAngel\Services\GuardianAngelService;
+use Icrewsystems\GuardianAngel\Commands\GuardianAngelCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Icrewsystems\GuardianAngel\Commands\GuardianAngelCommand;
 
 class GuardianAngelServiceProvider extends PackageServiceProvider
 {
@@ -23,7 +22,4 @@ class GuardianAngelServiceProvider extends PackageServiceProvider
             ->hasMigration('create_guardian-angel_table')
             ->hasCommand(GuardianAngelCommand::class);
     }
-
-
-
 }

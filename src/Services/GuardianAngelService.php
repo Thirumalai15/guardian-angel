@@ -3,18 +3,16 @@
 namespace Icrewsystems\GuardianAngel\Services;
 
 use App\Jobs\FireWebhookJob;
+use Exception;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Str;
-use Exception;
 
 class GuardianAngelService
 {
     /**
      * Log an exception and send an API call to Guardian Angel.
      *
-     * @param Exception $exception
-     * @param string|null $message
-     * @param array|null $context
+     * @param  Exception  $exception
      * @return false|string
      */
     public function logException(\Throwable $exception, ?string $message = null, ?array $context = null)
@@ -79,12 +77,12 @@ class GuardianAngelService
     /**
      * generate_gpt_question
      *
-     * @param mixed $message
+     * @param  mixed  $message
      * @return void
      */
     private function generate_gpt_question($message)
     {
-        return Str::replace(':MESSAGE:', $message, "I need you to do roleplay. You are a talented Laravel developer with 10+ years of experience. You are known for your ability to handle issues. I am going to provide you an exception message from a Laravel app. I need you to understand that exception message and give me steps to debug and fix the exception. Keep your response clear, crisp and concise in multiple steps, in a very professional manner in markdown format. The exception message is: :MESSAGE:");
+        return Str::replace(':MESSAGE:', $message, 'I need you to do roleplay. You are a talented Laravel developer with 10+ years of experience. You are known for your ability to handle issues. I am going to provide you an exception message from a Laravel app. I need you to understand that exception message and give me steps to debug and fix the exception. Keep your response clear, crisp and concise in multiple steps, in a very professional manner in markdown format. The exception message is: :MESSAGE:');
     }
 
     /**
@@ -92,13 +90,10 @@ class GuardianAngelService
      * see if an exception is occuring multiple times.
      *
      *
-     * @param array $data
      * @return string
      */
     private function generate_key_for_exception(array $data)
     {
-        return 'exception.' . Str::slug($data['host'] . '_' . $data['method'] . '_' . $data['exception']['exception'] . '_' . $data['exception']['line'] . '_' . $data['exception']['file'] . '_' . $data['exception']['class']);
+        return 'exception.'.Str::slug($data['host'].'_'.$data['method'].'_'.$data['exception']['exception'].'_'.$data['exception']['line'].'_'.$data['exception']['file'].'_'.$data['exception']['class']);
     }
 }
-
-
