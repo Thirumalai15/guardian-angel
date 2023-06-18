@@ -2,11 +2,9 @@
 
 namespace Icrewsystems\GuardianAngel\Commands;
 
-use App\Jobs\FireWebhookJob;
 use Exception;
 use Icrewsystems\GuardianAngel\Services\GuardianAngelService;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Queue;
 
 class GuardianAngelCommand extends Command
 {
@@ -33,14 +31,14 @@ class GuardianAngelCommand extends Command
                 $this->comment('✔ Queue connection is set to database');
             }
 
-            if (!config('app.project_key')) {
+            if (! config('app.project_key')) {
                 $this->comment('❌ Project key is not set');
                 $throwException = false;
             } else {
                 $this->comment('✔ Project key is set');
             }
 
-            if (!config('app.exception_url')) {
+            if (! config('app.exception_url')) {
                 $this->comment('❌ Exception URL is not set');
                 $throwException = false;
             } else {
@@ -51,13 +49,12 @@ class GuardianAngelCommand extends Command
                 $this->comment('✔ Everything is set perfectly. Throwing a test exception via console');
                 $this->comment('Throwing the exception.....');
 
-                throw new Exception('Hello, this is a test exception thrown from ' . config('app.name') . ' via console');
+                throw new Exception('Hello, this is a test exception thrown from '.config('app.name').' via console');
             } else {
                 $this->comment('❌ Some conditions are not met. The exception will not be thrown.');
             }
 
-
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $this->error($e->getMessage());
 
             $guardianAngelService = app(GuardianAngelService::class);
@@ -66,5 +63,4 @@ class GuardianAngelCommand extends Command
 
         return self::SUCCESS;
     }
-
 }
