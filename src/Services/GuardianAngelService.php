@@ -2,7 +2,7 @@
 
 namespace Icrewsystems\GuardianAngel\Services;
 
-use App\Jobs\FireWebhookJob;
+use Icrewsystems\GuardianAngel\Jobs\SendExceptionJob;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Str;
 use Exception;
@@ -70,7 +70,7 @@ class GuardianAngelService
             ]);
         }
 
-        FireWebhookJob::dispatch(json_encode($data));
+        SendExceptionJob::dispatch(json_encode($data));
 
         return true;
 

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Queue;
 
 class GuardianAngelCommand extends Command
 {
-    public $signature = 'guardian-angel';
+    public $signature = 'guardian-angel:test';
 
     public $description = 'A test command to check whether everything is working as expected';
 
